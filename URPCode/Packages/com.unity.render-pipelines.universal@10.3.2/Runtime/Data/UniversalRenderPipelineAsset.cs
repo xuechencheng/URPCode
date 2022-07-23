@@ -301,9 +301,7 @@ namespace UnityEngine.Rendering.Universal
             CreateRenderers();
             return new UniversalRenderPipeline(this);
         }
-        /// <summary>
-        /// Destroy ScriptableRenderer[]
-        /// </summary>
+        // Done
         void DestroyRenderers()
         {
             if (m_Renderers == null)

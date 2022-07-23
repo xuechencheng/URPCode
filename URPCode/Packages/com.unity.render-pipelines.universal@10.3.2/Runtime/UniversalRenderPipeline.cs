@@ -202,10 +202,8 @@ namespace UnityEngine.Rendering.Universal
 #if UNITY_2021_1_OR_NEWER
         protected override void Render(ScriptableRenderContext renderContext, List<Camera> cameras)
 #else
-        /// <summary>
-        /// Ö÷Ñ­»·
-        /// </summary>
-        /// Start Point
+
+        // Start Point
         protected override void Render(ScriptableRenderContext renderContext, Camera[] cameras)
 #endif
         {
