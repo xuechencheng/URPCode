@@ -59,7 +59,7 @@ namespace UnityEngine.Rendering.Universal.Internal
             using (new ProfilingScope(cmd, m_ProfilingSampler))
             {
                 Vector4 drawObjectPassData = new Vector4(0.0f, 0.0f, 0.0f, (m_IsOpaque) ? 1.0f : 0.0f);
-                cmd.SetGlobalVector(s_DrawObjectPassDataPropID, drawObjectPassData);
+                cmd.SetGlobalVector(s_DrawObjectPassDataPropID, drawObjectPassData);//Deprecated
                 // scaleBias.x = flipSign
                 // scaleBias.y = scale
                 // scaleBias.z = bias

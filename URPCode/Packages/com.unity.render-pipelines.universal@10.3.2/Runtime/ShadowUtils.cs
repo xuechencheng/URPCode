@@ -184,8 +184,7 @@ namespace UnityEngine.Rendering.Universal
         /// </summary>
         static Matrix4x4 GetShadowTransform(Matrix4x4 proj, Matrix4x4 view)
         {
-            // Currently CullResults ComputeDirectionalShadowMatricesAndCullingPrimitives doesn't
-            // apply z reversal to projection matrix. We need to do it manually here.
+            //Y÷·»°∑¥
             if (SystemInfo.usesReversedZBuffer)
             {
                 proj.m20 = -proj.m20;
@@ -205,8 +204,8 @@ namespace UnityEngine.Rendering.Universal
             textureScaleAndBias.m03 = 0.5f;
             textureScaleAndBias.m23 = 0.5f;
             textureScaleAndBias.m13 = 0.5f;
-            // Apply texture scale and offset to save a MAD in shader.
-            return textureScaleAndBias * worldToShadow;//
+            // [-1,1] * 0.5 + 0.5 = [0,1]
+            return textureScaleAndBias * worldToShadow;
         }
     }
 }

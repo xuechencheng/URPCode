@@ -1,0 +1,2 @@
+# Starting compiling Unity.RenderPipelines.Universal.Runtime.dll
+C:\Program Files\Unity\Hub\Editor\2020.3.21f1c1\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-0fc3c1c61f4bfc943bc09b7d11eb5556

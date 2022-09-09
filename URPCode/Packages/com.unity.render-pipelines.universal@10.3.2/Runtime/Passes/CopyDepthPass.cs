@@ -3,7 +3,7 @@ using System;
 namespace UnityEngine.Rendering.Universal.Internal
 {
     /// <summary>
-    /// CopyDepth.shader
+    /// CopyDepth.shader Paused
     /// </summary>
     public class CopyDepthPass : ScriptableRenderPass
     {
