@@ -384,7 +384,7 @@ namespace UnityEngine.Rendering.Universal
                 return;
             var renderer = baseCameraAdditionalData?.scriptableRenderer;
             bool supportsCameraStacking = renderer != null && renderer.supportedRenderingFeatures.cameraStacking;// Always true
-            List<Camera> cameraStack = (supportsCameraStacking) ? baseCameraAdditionalData?.cameraStack : null;
+            List<Camera> cameraStack = (supportsCameraStacking) ? baseCameraAdditionalData?.cameraStack : null;//不包含Base Camera
             bool anyPostProcessingEnabled = baseCameraAdditionalData != null && baseCameraAdditionalData.renderPostProcessing;
             int lastActiveOverlayCameraIndex = -1;//最后一个相机还要负责渲染到屏幕
             if (cameraStack != null)
