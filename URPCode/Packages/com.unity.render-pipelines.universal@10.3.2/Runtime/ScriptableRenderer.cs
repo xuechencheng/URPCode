@@ -292,7 +292,9 @@ namespace UnityEngine.Rendering.Universal
         public virtual void SetupLights(ScriptableRenderContext context, ref RenderingData renderingData)
         {
         }
-
+        /// <summary>
+        /// 1st Perfect
+        /// </summary>
         public virtual void SetupCullingParameters(ref ScriptableCullingParameters cullingParameters,
             ref CameraData cameraData)
         {
@@ -442,7 +444,7 @@ namespace UnityEngine.Rendering.Universal
         }
         
         /// <summary>
-        /// Clear Done
+        /// 1st Perfect Clear Done
         /// </summary>
         internal void Clear(CameraRenderType cameraType)
         {

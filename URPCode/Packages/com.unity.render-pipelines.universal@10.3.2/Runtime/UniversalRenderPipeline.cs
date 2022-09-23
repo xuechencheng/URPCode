@@ -33,7 +33,7 @@ namespace UnityEngine.Rendering.Universal
             public static readonly ProfilingSampler unknownSampler = new ProfilingSampler("Unknown");
 
             /// <summary>
-            /// 获取或增加相机的Sampler
+            /// 1st Perfect 获取或增加相机的Sampler
             /// </summary>
             public static ProfilingSampler TryGetOrAddCameraSampler(Camera camera)
             {
@@ -295,7 +295,7 @@ namespace UnityEngine.Rendering.Universal
             RenderSingleCamera(context, cameraData, cameraData.postProcessEnabled);
         }
         /// <summary>
-        /// 裁剪 Done
+        /// 1st Perfect 相机裁剪 Done
         /// </summary>
         static bool TryGetCullingParameters(CameraData cameraData, out ScriptableCullingParameters cullingParams)
         {
@@ -459,7 +459,7 @@ namespace UnityEngine.Rendering.Universal
                 //It should be called before culling to prepare material. When there isn't any VisualEffect component, this method has no effect.
                 VFX.VFXManager.PrepareCamera(baseCamera);
 #endif
-                UpdateVolumeFramework(baseCamera, baseCameraAdditionalData);
+                UpdateVolumeFramework(baseCamera, baseCameraAdditionalData);//Ignore
 #if ADAPTIVE_PERFORMANCE_2_0_0_OR_NEWER
                 if (asset.useAdaptivePerformance)
                     ApplyAdaptivePerformance(ref baseCameraData);
@@ -583,18 +583,18 @@ namespace UnityEngine.Rendering.Universal
 #endif
         }
         /// <summary>
-        /// 初始化CameraData Done
+        /// 1st Perfect 初始化CameraData Done
         /// </summary>
         static void InitializeCameraData(Camera camera, UniversalAdditionalCameraData additionalCameraData, bool resolveFinalTarget, out CameraData cameraData)
         {
             using var profScope = new ProfilingScope(null, Profiling.Pipeline.initializeCameraData);
             cameraData = new CameraData();
             InitializeStackedCameraData(camera, additionalCameraData, ref cameraData);
-            InitializeAdditionalCameraData(camera, additionalCameraData, resolveFinalTarget, ref cameraData);
+            InitializeAdditionalCameraData(camera, additionalCameraData, resolveFinalTarget, ref cameraData);//resolveFinalTarget 没有相机栈
         }
 
         /// <summary>
-        /// 初始化CameraData信息 Done
+        /// 1st Perfect 初始化CameraData信息 Done
         /// </summary>
         static void InitializeStackedCameraData(Camera baseCamera, UniversalAdditionalCameraData baseAdditionalCameraData, ref CameraData cameraData)
         {
@@ -678,19 +678,19 @@ namespace UnityEngine.Rendering.Universal
 #else
             cameraData.xr = XRPass.emptyPass;
 #endif
-            var commonOpaqueFlags = SortingCriteria.CommonOpaque;
+            var commonOpaqueFlags = SortingCriteria.CommonOpaque;//SortingLayer | RenderQueue |  QuantizedFrontToBack | OptimizeStateChanges | CanvasOrder 
             var noFrontToBackOpaqueFlags = SortingCriteria.SortingLayer | SortingCriteria.RenderQueue | SortingCriteria.OptimizeStateChanges | SortingCriteria.CanvasOrder;
             bool hasHSRGPU = SystemInfo.hasHiddenSurfaceRemovalOnGPU;
             bool canSkipFrontToBackSorting = (baseCamera.opaqueSortMode == OpaqueSortMode.Default && hasHSRGPU) || baseCamera.opaqueSortMode == OpaqueSortMode.NoDistanceSort;
             cameraData.defaultOpaqueSortFlags = canSkipFrontToBackSorting ? noFrontToBackOpaqueFlags : commonOpaqueFlags;
-            cameraData.captureActions = CameraCaptureBridge.GetCaptureActions(baseCamera);
+            cameraData.captureActions = CameraCaptureBridge.GetCaptureActions(baseCamera);//Ignore
             bool needsAlphaChannel = Graphics.preserveFramebufferAlpha;
             cameraData.cameraTargetDescriptor = CreateRenderTextureDescriptor(baseCamera, cameraData.renderScale,
                 cameraData.isHdrEnabled, msaaSamples, needsAlphaChannel);
         }
 
         /// <summary>
-        /// 初始化相机数据 Done
+        /// 1st Perfect 初始化相机数据 Done
         /// </summary>
         static void InitializeAdditionalCameraData(Camera camera, UniversalAdditionalCameraData additionalCameraData, bool resolveFinalTarget, ref CameraData cameraData)
         {
@@ -758,7 +758,7 @@ namespace UnityEngine.Rendering.Universal
             cameraData.SetViewAndProjectionMatrix(camera.worldToCameraMatrix, projectionMatrix);
         }
         /// <summary>
-        /// 初始化渲染数据，主要是灯光，阴影和后处理 Done
+        /// 1st Perfect 初始化渲染数据，主要是灯光，阴影和后处理
         /// </summary>
         static void InitializeRenderingData(UniversalRenderPipelineAsset settings, ref CameraData cameraData, ref CullingResults cullResults,
             bool anyPostProcessingEnabled, out RenderingData renderingData)
@@ -798,7 +798,7 @@ namespace UnityEngine.Rendering.Universal
             renderingData.postProcessingEnabled = anyPostProcessingEnabled;
         }
         /// <summary>
-        /// 初始化阴影数据 Done
+        /// 1st Perfect 初始化阴影数据
         /// </summary>
         static void InitializeShadowData(UniversalRenderPipelineAsset settings, NativeArray<VisibleLight> visibleLights, bool mainLightCastShadows, bool additionalLightsCastShadows, out ShadowData shadowData)
         {
@@ -845,14 +845,16 @@ namespace UnityEngine.Rendering.Universal
             shadowData.supportsSoftShadows = settings.supportsSoftShadows && (shadowData.supportsMainLightShadows || shadowData.supportsAdditionalLightShadows);
             shadowData.shadowmapDepthBufferBits = 16;
         }
-        // Done
+        /// <summary>
+        /// 1st Perfect
+        /// </summary>
         static void InitializePostProcessingData(UniversalRenderPipelineAsset settings, out PostProcessingData postProcessingData)
         {
             postProcessingData.gradingMode = settings.supportsHDR ? settings.colorGradingMode : ColorGradingMode.LowDynamicRange;
             postProcessingData.lutSize = settings.colorGradingLutSize;
         }
         /// <summary>
-        /// 初始化光照信息 Done
+        /// 1st Perfect 初始化光照信息
         /// </summary>
         static void InitializeLightData(UniversalRenderPipelineAsset settings, NativeArray<VisibleLight> visibleLights, int mainLightIndex, out LightData lightData)
         {
@@ -875,7 +877,7 @@ namespace UnityEngine.Rendering.Universal
             lightData.supportsMixedLighting = settings.supportsMixedLighting;
         }
         /// <summary>
-        /// 获取PerObjectData配置 Done
+        /// 1st Perfect 获取PerObjectData配置
         /// </summary>
         static PerObjectData GetPerObjectLightFlags(int additionalLightsCount)
         {
@@ -892,7 +894,7 @@ namespace UnityEngine.Rendering.Universal
         }
 
         /// <summary>
-        /// 获取主光源 Done
+        /// 1st Perfect 获取主光源
         /// </summary>
         static int GetMainLightIndex(UniversalRenderPipelineAsset settings, NativeArray<VisibleLight> visibleLights)
         {
@@ -929,7 +931,7 @@ namespace UnityEngine.Rendering.Universal
         }
 
         /// <summary>
-        /// 设置Shader环境常量 Done
+        /// 1st Perfect 设置Shader环境光信息
         /// </summary>
         static void SetupPerFrameShaderConstants()
         {

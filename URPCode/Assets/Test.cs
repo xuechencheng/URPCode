@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class LineTest : MonoBehaviour
+public class Test : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,7 @@ public class LineTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void OnRenderObject()
-    {
+        var asset = QualitySettings.renderPipeline as UniversalRenderPipelineAsset;
+        Debug.LogError(asset.msaaSampleCount);
     }
 }

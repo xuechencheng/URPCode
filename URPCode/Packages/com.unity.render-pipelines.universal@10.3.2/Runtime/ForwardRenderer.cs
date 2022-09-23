@@ -230,7 +230,7 @@ namespace UnityEngine.Rendering.Universal
         }
 
         /// <summary>
-        /// 设置需要渲染的Pass Done
+        /// 设置需要渲染的Pass Done Pause
         /// </summary>
         public override void Setup(ScriptableRenderContext context, ref RenderingData renderingData)
         {
@@ -513,10 +513,9 @@ namespace UnityEngine.Rendering.Universal
         }
 
         /// <summary>
-        /// 设置剔除信息：阴影和灯光数量 Done
+        /// 1st Perfect 设置剔除信息：阴影和灯光数量 Done
         /// </summary>
-        public override void SetupCullingParameters(ref ScriptableCullingParameters cullingParameters,
-            ref CameraData cameraData)
+        public override void SetupCullingParameters(ref ScriptableCullingParameters cullingParameters, ref CameraData cameraData)
         {
             bool isShadowCastingDisabled = !UniversalRenderPipeline.asset.supportsMainLightShadows && !UniversalRenderPipeline.asset.supportsAdditionalLightShadows;
             bool isShadowDistanceZero = Mathf.Approximately(cameraData.maxShadowDistance, 0.0f);

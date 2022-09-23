@@ -364,7 +364,9 @@ namespace UnityEngine.Rendering.Universal
         static Vector4 k_DefaultLightsProbeChannel = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
 
         static List<Vector4> m_ShadowBiasData = new List<Vector4>();
-        // Done
+        /// <summary>
+        /// 1st Perfect
+        /// </summary>
         public static bool IsGameCamera(Camera camera)
         {
             if (camera == null)
@@ -419,7 +421,7 @@ namespace UnityEngine.Rendering.Universal
         }
 #else
         /// <summary>
-        /// 摄像机按depth排序 Done
+        /// 1st Perfect 摄像机按depth排序
         /// </summary>
         void SortCameras(Camera[] cameras)
         {
@@ -428,7 +430,7 @@ namespace UnityEngine.Rendering.Universal
         }
 #endif
         /// <summary>
-        /// 创建RenderTexture描述符
+        /// 1st Perfect 创建RenderTexture描述符
         /// </summary>
         static RenderTextureDescriptor CreateRenderTextureDescriptor(Camera camera, float renderScale, bool isHdrEnabled, int msaaSamples, bool needsAlpha)
         {
